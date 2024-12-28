@@ -1,0 +1,174 @@
+   body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+     /* background: url('https://global.discourse-cdn.com/brave/original/3X/0/5/05ab24246ec26614fa27106953bbf7fcaa83ebae.gif') no-repeat center center/cover;  */
+    background: url('https://archive.org/download/wp2757875-wallpaper-gif/wp2757875-wallpaper-gif.gif') no-repeat center center/cover;
+
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.auth-container {
+    width: 800px;
+    height: 500px;
+    display: flex;
+    position: relative;
+}
+
+.auth-panel {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.6s ease-in-out;
+}
+
+.auth-panel.signup-mode {
+    transform: translateX(-50%);
+}
+
+.left-panel, .right-panel {
+    width: 50%;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.6s ease-in-out;
+}
+
+.left-panel {
+    background: rgba(106, 17, 203, 0.85); 
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-panel {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-panel h2, .right-panel h2 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.left-panel p {
+    margin: 20px 0;
+    font-size: 1rem;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 80%;
+}
+
+.auth-form input, .auth-form select, .auth-form button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.auth-form input:focus, .auth-form select:focus {
+    outline: none;
+    border-color: #6a11cb;
+}
+
+.submit-button {
+    background: #6a11cb;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-button:hover {
+    background: #2575fc;
+}
+
+.toggle-button {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.toggle-button:hover {
+    background: white;
+    color: #6a11cb;
+}
+
+.forgot-button {
+    background: none;
+    border: none;
+    color: #6a11cb;
+    font-size: 0.9rem;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.forgot-button:hover {
+    text-decoration: underline;
+}
+
+
+.otp-box {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .otp-box p {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .verify-button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .verify-button:hover {
+    background-color: #45a049;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
