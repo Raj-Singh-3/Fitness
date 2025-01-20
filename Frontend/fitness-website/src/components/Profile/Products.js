@@ -1,32 +1,3 @@
-// import React from "react";
-
-// const Products = () => {
-//   return (
-//     <div>
-//       <h2 className="text-2xl font-bold mb-4">Ordered Products</h2>
-//       <ul className="space-y-4">
-//         <li>
-//           <p>Protein Shake - $30</p>
-//           <p>Status: Delivered</p>
-//         </li>
-//         <li>
-//           <p>Resistance Bands - $20</p>
-//           <p>Status: In Transit</p>
-//         </li>
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default Products;
-
-
-
-
-
-
-
-
 import React, { useState } from "react";
 
 const Products = () => {
