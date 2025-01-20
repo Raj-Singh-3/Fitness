@@ -284,6 +284,7 @@ const BMICalculator = () => {
       setCategory("");
     }
   };
+  
 
   // Data for the height-weight chart
   const chartData = [

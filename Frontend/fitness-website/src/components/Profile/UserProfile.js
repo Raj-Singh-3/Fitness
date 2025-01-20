@@ -6,120 +6,7 @@ import Settings from "./Settings";
 import MembershipPlans from "./MembershipPlans";
 import Products from "./Products";
 import Notifications from "./Notifications";
-
-const EditProfile = ({ user, onSave }) => {
-  const [formData, setFormData] = useState({ ...user });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSave = () => {
-    const updatedUser = {
-      ...formData,
-      age: new Date().getFullYear() - new Date(formData.dob).getFullYear(),
-    };
-    onSave(updatedUser);
-  };
-
-  return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
-      <form className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full border p-2 rounded"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Bio</label>
-          <textarea
-            name="bio"
-            value={formData.bio}
-            onChange={handleChange}
-            className="w-full border p-2 rounded"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Date of Birth</label>
-          <input
-            type="date"
-            name="dob"
-            value={formData.dob}
-            onChange={handleChange}
-            className="w-full border p-2 rounded"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Height (cm)</label>
-          <input
-            type="number"
-            name="height"
-            value={formData.height}
-            onChange={handleChange}
-            className="w-full border p-2 rounded"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Weight (kg)</label>
-          <input
-            type="number"
-            name="weight"
-            value={formData.weight}
-            onChange={handleChange}
-            className="w-full border p-2 rounded"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full border p-2 rounded"
-          />
-        </div>
-        {/* <div>
-          <label className="block text-sm font-medium">Phone</label>
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full border p-2 rounded"
-          />
-        </div> */}
-        <div>
-          <label className="block text-sm font-medium">Display Picture URL</label>
-          <input
-            type="text"
-            name="displayPicture"
-            value={formData.displayPicture}
-            onChange={handleChange}
-            className="w-full border p-2 rounded"
-          />
-        </div>
-        <button
-          type="button"
-          onClick={handleSave}
-          className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-        >
-          Save Changes
-        </button>
-      </form>
-    </div>
-  );
-};
+import EditProfile from "./EditProfile";
 
 const UserProfile = () => {
   const [activeComponent, setActiveComponent] = useState("workout");
@@ -133,7 +20,6 @@ const UserProfile = () => {
     height: 180,
     weight: 75,
     email: "johndoe@example.com",
-    // phone: "+123-456-7890",
     displayPicture:
       "https://static.vecteezy.com/system/resources/previews/023/531/788/non_2x/shirtless-bodybuilder-with-mountainous-background-realistic-illustration-ai-generated-free-photo.jpg",
   });
@@ -141,6 +27,20 @@ const UserProfile = () => {
   const handleSave = (updatedUser) => {
     setUser(updatedUser);
     setIsEditing(false);
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setUser((prevUser) => ({
+          ...prevUser,
+          displayPicture: reader.result,
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const renderComponent = () => {
@@ -170,14 +70,30 @@ const UserProfile = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-col">
       <div className="h-auto lg:h-[40vh] bg-blue-500 text-white p-6 lg:flex lg:items-center lg:justify-between">
-        <div className="lg:w-1/4 flex flex-col items-center justify-center h-full">
-          <div className="w-36 h-36 rounded-full bg-gray-200 overflow-hidden shadow-lg mb-4">
-            <img
-              src={user.displayPicture}
-              alt="User Profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
+        <div className="lg:w-1/4 flex flex-col items-center justify-center h-full relative">
+        <div className="w-36 h-36 rounded-full bg-gray-200 overflow-visible shadow-lg mb-4 relative">
+  <img
+    src={user.displayPicture}
+    alt="User Profile"
+    className="w-full h-full object-cover"
+    style={{borderRadius:20}}
+  />
+  <label
+    htmlFor="imageUpload"
+    className="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-md cursor-pointer transform translate-x-2 translate-y-2"
+    title="Change Profile Picture"
+  >
+    ✏️
+  </label>
+  <input
+    type="file"
+    id="imageUpload"
+    accept="image/*"
+    className="hidden"
+    onChange={handleImageChange}
+  />
+</div>
+
           <h1 className="text-3xl font-bold">{user.name}</h1>
         </div>
 
@@ -202,10 +118,6 @@ const UserProfile = () => {
               <p className="font-semibold text-sm lg:text-base">Email</p>
               <p className="text-sm lg:text-lg">{user.email}</p>
             </div>
-            {/* <div>
-              <p className="font-semibold text-sm lg:text-base">Phone</p>
-              <p className="text-sm lg:text-lg">{user.phone}</p>
-            </div> */}
           </div>
 
           <div className="mt-1 flex justify-center lg:justify-start">
@@ -219,7 +131,6 @@ const UserProfile = () => {
         </div>
       </div>
       <div className="flex flex-col lg:flex-row flex-grow">
-        {/* Left Navigation */}
         <div className="bg-white lg:w-1/4 p-4 relative lg:static">
           <button
             className="lg:hidden block absolute top-4 left-4"
@@ -249,9 +160,7 @@ const UserProfile = () => {
               </li>
               <li
                 className={`cursor-pointer ${
-                  activeComponent === "nutrition"
-                    ? "text-blue-500 font-bold"
-                    : ""
+                  activeComponent === "nutrition" ? "text-blue-500 font-bold" : ""
                 }`}
                 onClick={() => {
                   setActiveComponent("nutrition");
@@ -262,9 +171,7 @@ const UserProfile = () => {
               </li>
               <li
                 className={`cursor-pointer ${
-                  activeComponent === "progress"
-                    ? "text-blue-500 font-bold"
-                    : ""
+                  activeComponent === "progress" ? "text-blue-500 font-bold" : ""
                 }`}
                 onClick={() => {
                   setActiveComponent("progress");
@@ -275,9 +182,7 @@ const UserProfile = () => {
               </li>
               <li
                 className={`cursor-pointer ${
-                  activeComponent === "membership"
-                    ? "text-blue-500 font-bold"
-                    : ""
+                  activeComponent === "membership" ? "text-blue-500 font-bold" : ""
                 }`}
                 onClick={() => {
                   setActiveComponent("membership");
@@ -288,9 +193,7 @@ const UserProfile = () => {
               </li>
               <li
                 className={`cursor-pointer ${
-                  activeComponent === "products"
-                    ? "text-blue-500 font-bold"
-                    : ""
+                  activeComponent === "products" ? "text-blue-500 font-bold" : ""
                 }`}
                 onClick={() => {
                   setActiveComponent("products");
@@ -301,9 +204,7 @@ const UserProfile = () => {
               </li>
               <li
                 className={`cursor-pointer ${
-                  activeComponent === "notifications"
-                    ? "text-blue-500 font-bold"
-                    : ""
+                  activeComponent === "notifications" ? "text-blue-500 font-bold" : ""
                 }`}
                 onClick={() => {
                   setActiveComponent("notifications");
@@ -314,9 +215,7 @@ const UserProfile = () => {
               </li>
               <li
                 className={`cursor-pointer ${
-                  activeComponent === "settings"
-                    ? "text-blue-500 font-bold"
-                    : ""
+                  activeComponent === "settings" ? "text-blue-500 font-bold" : ""
                 }`}
                 onClick={() => {
                   setActiveComponent("settings");

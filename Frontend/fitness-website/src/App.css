@@ -1,0 +1,10 @@
+/* Hide the scrollbar but allow scrolling */
+.snap-y {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .snap-y::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  

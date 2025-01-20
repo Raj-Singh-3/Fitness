@@ -9,8 +9,8 @@ import BMICalculator from "./components/BMICalculator";
 import ProductPage from "./components/ProductPage";
 import Features from "./components/Features";
 import Testimonials from "./components/Testimonials";
-import Hero from "./components/Hero";
 import AuthPage from "./components/AuthPage";
+import './App.css';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -22,14 +22,35 @@ const App = () => {
           <Navbar />
           <div className="main-content">
             <Routes>
-              <Route path="/" element={<Home />} />
+              {/* Separate Profile Page */}
               <Route path="/profile" element={<Profile />} />
-              <Route path="/membership" element={<MembershipPage />} />
-              <Route path="/bmi-calculator" element={<BMICalculator />} />
+
+              {/* Separate Products Page */}
               <Route path="/products" element={<ProductPage />} />
-              <Route path="/features" element={<Features />} />
-              <Route path="/testimonials" element={<Testimonials />} />
-              <Route path="/hero" element={<Hero />} />
+
+              {/* Scrollable Section for Other Pages */}
+              <Route
+                path="/"
+                element={
+                  <div className="snap-y snap-mandatory h-screen overflow-y-scroll">
+                    <section id="home" className="snap-start">
+                      <Home />
+                    </section>
+                    <section id="features" className="snap-start">
+                      <Features />
+                    </section>
+                    <section id="membership" className="snap-start">
+                      <MembershipPage />
+                    </section>
+                    <section id="bmi-calculator" className="snap-start">
+                      <BMICalculator />
+                    </section>
+                    <section id="testimonials" className="snap-start">
+                      <Testimonials />
+                    </section>
+                  </div>
+                }
+              />
               <Route path="*" element={<Navigate to="/" />} /> {/* Redirect unknown routes */}
             </Routes>
           </div>
@@ -43,3 +64,4 @@ const App = () => {
 };
 
 export default App;
+

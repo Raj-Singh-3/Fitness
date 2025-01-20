@@ -1,31 +1,3 @@
-// import React from "react";
-// import { motion } from "framer-motion";
-
-// const Testimonials = () => {
-//   return (
-//     <section className="bg-blue-50 py-16 px-6">
-//       <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
-//         What Our Users Say
-//       </h2>
-//       <motion.div
-//         className="max-w-4xl mx-auto text-center"
-//         initial={{ opacity: 0 }}
-//         animate={{ opacity: 1 }}
-//         transition={{ duration: 1 }}
-//       >
-//         <blockquote className="text-xl italic text-gray-700">
-//           "FitLife has completely transformed my fitness journey. Highly recommend it!"
-//         </blockquote>
-//         <p className="text-gray-600 mt-4">- Alex Johnson</p>
-//       </motion.div>
-//     </section>
-//   );
-// };
-
-// export default Testimonials;
-
-
-
 import React from "react";
 import { motion } from "framer-motion";
 
